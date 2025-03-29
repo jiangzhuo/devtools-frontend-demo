@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>devtools-frontend-demo</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #555;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: calc(100% - 22px); /* Adjust for padding and border */
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+            margin-right: 5px; /* Space between buttons */
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        /* Specific styles for terminate button */
+        button.terminate {
+            background-color: #dc3545; /* Red color */
+        }
+        button.terminate:hover {
+            background-color: #c82333; /* Darker red */
+        }
+        /* Specific styles for fetch target button */
+        button.fetch-targets {
+            background-color: #28a745; /* Green color */
+            font-size: 0.9em; /* Slightly smaller */
+            padding: 8px 12px;
+        }
+        button.fetch-targets:hover {
+            background-color: #218838; /* Darker green */
+        }
+        #targetsList {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+        #targetsList li {
+            background-color: #f8f9fa; /* Lighter background for target items */
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #eee;
+        }
+        #targetsList a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        #targetsList a:hover {
+            text-decoration: underline;
+        }
+        .target-info {
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+        .target-title {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .target-url {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .target-actions a {
+            margin-left: 10px;
+        }
+        #loading, #error {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        #loading {
+            color: #ffc107;
+        }
+        #error {
+            color: #dc3545;
+            white-space: pre-wrap; /* Allow wrapping long error messages */
+        }
+        /* Added styles for instance management */
+        .instance-manager,
+        .manual-connect {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+        #instanceList {
+            list-style: none;
+            padding: 0;
+        }
+        #instanceList li {
+            background-color: #e9ecef;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .instance-info span {
+            margin-right: 15px;
+            font-size: 0.95em;
+        }
+        .instance-actions button {
+            font-size: 0.9em;
+            padding: 8px 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>devtools-frontend-demo</h1>
+        <p>Connect to remote headless Chrome DevTools.</p>
+
+        <!-- Instance Management Section -->
+        <div class="instance-manager">
+            <h2>Managed Instances</h2>
+            <button id="createInstanceBtn">Create New Instance</button>
+            <div id="instanceLoading" style="display: none;">Creating...</div>
+            <div id="instanceError" class="error" style="display: none;"></div> <!-- Dedicated error div -->
+            <ul id="instanceList"></ul>
+            <p><small>Managed instances run locally on this server.</small></p>
+        </div>
+
+        <!-- Manual Connection Section -->
+        <div class="manual-connect">
+            <h2>Manual Connection</h2>
+            <p>Connect to a Chrome instance running anywhere (local or remote) by providing its IP.</p>
+            <label for="remoteIp">Remote Chrome IP:</label>
+            <input type="text" id="remoteIp" name="remoteIp" placeholder="e.g., 192.168.1.100">
+            <!-- Default port 9222 is assumed if not specified by the backend -->
+            <button id="fetchTargetsBtn" class="fetch-targets">Fetch Targets</button>
+        </div>
+
+        <div id="loading" style="display: none;">Loading...</div>
+        <div id="error" style="display: none;"></div>
+
+        <h2>Available Debug Targets</h2>
+        <div id="targetsInfo" style="margin-bottom: 10px;"></div> <!-- Info about which instance targets are shown for -->
+        <ul id="targetsList"></ul>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

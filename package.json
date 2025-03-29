@@ -1,0 +1,24 @@
+{
+  "name": "devtools-frontend-demo",
+  "version": "1.0.0",
+  "description": "A demo for managing Chrome instances and using the DevTools frontend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "chrome",
+    "devtools",
+    "headless",
+    "remote",
+    "debug"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chrome-devtools-frontend-build": "^1.0.25067",
+    "express": "^4.19.2",
+    "find-free-port": "^2.0.0"
+  }
+}
