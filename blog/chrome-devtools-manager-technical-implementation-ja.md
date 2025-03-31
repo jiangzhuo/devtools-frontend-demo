@@ -6,7 +6,7 @@
 
 Chrome DevTools マネージャーの実際の動作をより良く説明するために、アプリケーションの主要機能を示すスクリーンキャストデモを作成しました：
 
-![Chrome DevTools マネージャーデモ](../media/recordings/Screencast%20from2025-03-31%2017-28-56.webm)
+![Chrome DevTools マネージャーデモ](../media/recordings/Chrome-DevTools-Manager-Demo.gif)
 
 このスクリーンキャストでは以下を実演しています：
 
@@ -495,7 +495,20 @@ ws.onopen = () => {
 
 ws.onmessage = (event) => {
     const message = JSON.parse(event.data);
-    console.log('受信:', message);
+    console.log('メッセージを受信:', message);
+    
+    // レスポンスを処理
+    if (message.id === 1) {
+        // URLナビゲーションを処理
+    }
+};
+
+ws.onerror = (error) => {
+    console.error('WebSocketエラー:', error);
+};
+
+ws.onclose = () => {
+    console.log('WebSocket接続が閉じられました');
 };
 ```
 

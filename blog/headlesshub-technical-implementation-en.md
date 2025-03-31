@@ -6,7 +6,7 @@
 
 To better illustrate how the Chrome DevTools Manager works in practice, we've created a screencast demonstration that shows the key features of the application:
 
-![Chrome DevTools Manager Demo](../media/recordings/Screencast%20from2025-03-31%2017-28-56.webm)
+![Chrome DevTools Manager Demo](../media/recordings/Chrome-DevTools-Manager-Demo.gif)
 
 The screencast demonstrates:
 
